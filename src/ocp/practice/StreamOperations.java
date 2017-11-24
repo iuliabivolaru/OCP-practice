@@ -1,8 +1,11 @@
 package ocp.practice;
 
 import javax.swing.*;
+import java.util.Map;
 import java.util.TreeSet;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -32,5 +35,9 @@ public class StreamOperations {
         Stream.iterate("-", s -> s + s)
                 .limit(3)
                 .forEach(System.out::println);
+
+        Stream<String> streamForIdentityFunctionTest = Stream.of("w", "w", "l", "f");
+        Map<String, Integer> map = streamForIdentityFunctionTest.collect(Collectors.toMap(Function.identity(), String::length, (k, v) -> k+v));
+        map.forEach((k, v) -> System.out.println(k + " " + v));
     }
 }
