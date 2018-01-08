@@ -24,21 +24,23 @@ public class FilePractice {
         System.out.println(new File("src\\ocp\\practice\\animalWorld\\pumas").mkdirs());
         System.out.println(new File("src\\ocp\\practice\\animalWorld\\pumas").delete());
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\ocp\\practice\\animalWorld\\FormatNumbers.java"))) {
-            System.out.println(bufferedReader.readLine());
+//        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("src\\ocp\\practice\\animalWorld\\FormatNumbers.java"))) {
+//            System.out.println(bufferedReader.readLine());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("src\\ocp\\practice\\animalWorld\\puma.txt")));
+             ObjectInputStream objectInputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream("src\\ocp\\practice\\animalWorld\\puma.txt"))))
+             {
+            Animal animal = new Animal("1", 1);
+            objectOutputStream.writeObject(animal);
+//            objectOutputStream.flush();
+//                 Object x = objectInputStream.readObject();
+                 System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("src\\ocp\\practice\\animalWorld\\puma.txt")));
-//             ObjectInputStream objectInputStream = new ObjectInputStream(new BufferedInputStream(new FileInputStream("src\\ocp\\practice\\animalWorld\\puma.txt")))) {
-//            String s = "pumaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-//            objectOutputStream.writeObject(s);
-//            objectOutputStream.flush();
-//            System.out.println(objectInputStream.readObject());
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
 
         try (InputStream inputStream = new FileInputStream("src\\ocp\\practice\\animalWorld\\puma.txt");
              OutputStream outputStream = new FileOutputStream("src\\ocp\\practice\\animalWorld\\puma2.txt")) {
